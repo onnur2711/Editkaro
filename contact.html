@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+  <title>Editkaro.in — Contact</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#2962ff">
+
+  <style>
+    :root {
+      --accent-1:#2962ff;
+      --accent-2:#00d4ff;
+      --neon: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      --muted:#556077;
+      --text:#0f1724;
+      --card:#ffffff;
+      --glass:rgba(255,255,255,0.6);
+      --glass-border:rgba(15,23,36,0.06);
+      --shadow:0 12px 30px rgba(15,23,36,0.06);
+      --radius:14px;
+      font-family:Inter,system-ui,Arial,sans-serif;
+    }
+
+    body {
+      margin:0;
+      background:linear-gradient(135deg,#e6f6ff 0%, #f8fbff 45%, #ffffff 100%);
+      color:var(--text);
+    }
+
+    .container {
+      max-width:1100px;
+      margin:0 auto;
+      padding:20px;
+    }
+
+    /* HEADER */
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 0;
+    }
+
+    .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .logo-box {
+      width:56px;
+      height:56px;
+      background:linear-gradient(180deg,rgba(41,98,255,0.12),rgba(0,212,255,0.06));
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      border:1px solid var(--glass-border);
+      box-shadow:var(--shadow);
+    }
+
+    .brand h1 {
+      margin:0;
+      font-size:18px;
+      font-weight:800;
+      color:var(--accent-1);
+    }
+
+    .brand p {
+      margin:0;
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    nav.site-nav {
+      display:flex;
+      gap:10px;
+      margin-left:auto;
+    }
+
+    nav.site-nav a {
+      padding:10px 14px;
+      border-radius:10px;
+      text-decoration:none;
+      color:#fff;
+      background:var(--neon);
+      font-weight:700;
+      box-shadow:0 8px 20px rgba(41,98,255,0.15);
+    }
+
+    nav.site-nav a.ghost {
+      background:transparent;
+      color:var(--accent-1);
+      border:1px solid rgba(41,98,255,0.2);
+    }
+
+    /* CONTACT LAYOUT */
+    .contact-grid {
+      margin-top:32px;
+      display:grid;
+      grid-template-columns:1fr 350px;
+      gap:24px;
+    }
+
+    .card {
+      background:var(--card);
+      padding:22px;
+      border-radius:var(--radius);
+      border:1px solid var(--glass-border);
+      box-shadow:var(--shadow);
+    }
+
+    .card h2, .card h3 {
+      margin-top:0;
+      margin-bottom:12px;
+    }
+
+    input, textarea {
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,36,0.12);
+      font-size:15px;
+      margin-bottom:12px;
+      background:#fff;
+    }
+
+    textarea {
+      height:140px;
+      resize:none;
+    }
+
+    .btn {
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:0;
+      background:var(--neon);
+      color:white;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .info-box {
+      margin-top:18px;
+    }
+
+    .info-item {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .info-item span {
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    a.social {
+      text-decoration:none;
+      font-weight:600;
+      color:var(--accent-1);
+      margin-right:12px;
+    }
+
+    .message {
+      margin-top:12px;
+      padding:10px;
+      border-radius:8px;
+      font-size:14px;
+    }
+
+    .success { background:#ecfdf5; color:#065f46; }
+    .error { background:#fff1f2; color:#9f1239; }
+
+    @media(max-width:860px){
+      .contact-grid { grid-template-columns:1fr; }
+      nav.site-nav { display:none; }
+    }
+  </style>
+</head>
+
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <div class="logo-box">
+        <svg width="34" height="34" viewBox="0 0 24 24">
+          <defs>
+            <linearGradient id="neonLogo" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#2962ff"/>
+              <stop offset="100%" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+          <text x="12" y="17" font-size="15" font-weight="900" fill="url(#neonLogo)" text-anchor="middle">EK</text>
+        </svg>
+      </div>
+      <div>
+        <h1>EDITKARO.IN</h1>
+        <p>Social media marketing & video editing</p>
+      </div>
+    </div>
+
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="about.html">About</a>
+      <a class="ghost" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- CONTACT SECTION -->
+  <div class="contact-grid">
+
+    <!-- LEFT: FORM -->
+    <div class="card">
+      <h2>Contact Us</h2>
+      <p style="color:var(--muted);margin-bottom:18px;">
+        Have a question or want to work together? Feel free to reach out!
+      </p>
+
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <textarea name="message" placeholder="Your message..." required></textarea>
+        <button class="btn" type="submit">Send Message</button>
+      </form>
+
+      <div id="formMessage"></div>
+    </div>
+
+    <!-- RIGHT: INFO -->
+    <div>
+      <div class="card">
+        <h3>Contact Information</h3>
+
+        <div class="info-box">
+          <div class="info-item">📧 <span>dudekulaonnurbeee@gmail.com</span></div>
+          <div class="info-item">📞 <span>+91 96522890664</span></div>
+          <div class="info-item">📍 <span>India — Available Worldwide</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <h3>Follow Us</h3>
+        <a class="social" href="https://www.instagram.com/onnurbeedudekula?igsh=MWkyamE0dmhraTRkNA==&utm_source=ig_contact_invite">Instagram</a>
+        <a class="social" href="https://www.linkedin.com/in/onnurbee-dudekula-a8588928a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a>
+        <a class="social" href="https://github.com/onnur2711">GitHub</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- FORMSPREE SCRIPT -->
+<script>
+const FORM_ENDPOINT = "https://formspree.io/f/mkgdnvlo";
+
+const form = document.getElementById("contactForm");
+const msgBox = document.getElementById("formMessage");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  msgBox.innerHTML = "";
+
+  const data = new FormData(form);
+
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      body: data,
+      headers: { "Accept": "application/json" }
+    });
+
+    if (res.ok) {
+      msgBox.innerHTML = <div class="message success">Message sent successfully!</div>;
+      form.reset();
+    } else {
+      msgBox.innerHTML = <div class="message error">Something went wrong. Try again.</div>;
+    }
+
+  } catch (err) {
+    msgBox.innerHTML = <div class="message error">Network error. Try again.</div>;
+  }
+});
+</script>
+
+</body>
+</html>

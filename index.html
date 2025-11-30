@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
+<title>Editkaro — Home</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#2962ff">
+<meta name="description" content="Editkaro.in — video editing portfolio. Subscribe for updates and view our portfolio of editing work." />
+<!-- Single-file styles for the updated homepage look -->
+
+<style>
+  :root{
+    --accent-1:#2962ff;
+    --accent-2:#00d4ff;
+    --neon: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+    --muted:#556077;
+    --text:#0f1724;
+    --card:#ffffff;
+    --glass-border: rgba(15,23,36,0.06);
+    --radius:14px;
+    --shadow: 0 12px 30px rgba(15,23,36,0.06);
+    --max-width:1100px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;padding:0;background:linear-gradient(180deg,#fbfdff 0%, #ffffff 100%);color:var(--text);-webkit-font-smoothing:antialiased;}
+  .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+  /* Header */
+  header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:8px 0 28px}
+  .brand{display:flex;gap:12px;align-items:center}
+  .logo-box{width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg, rgba(41,98,255,0.12), rgba(0,212,255,0.06));display:grid;place-items:center;border:1px solid rgba(15,23,36,0.04);box-shadow:var(--shadow);}
+  .brand h1{margin:0;font-size:18px;font-weight:800;color:var(--accent-1);letter-spacing:0.4px}
+  .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+  nav.site-nav{display:flex;gap:10px;align-items:center}
+  nav.site-nav a{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,#2f8bff,#00d4ff);color:#fff;text-decoration:none;font-weight:700;font-size:14px;box-shadow: 0 6px 18px rgba(41,98,255,0.06);}
+  nav.site-nav a.ghost{background:transparent;color:var(--accent-1);border:1px solid rgba(41,98,255,0.12)}
+
+  /* HERO */
+  .hero{
+    display:grid;
+    grid-template-columns: 1fr 460px;
+    gap:36px;
+    align-items:center;
+    padding:18px 0 36px;
+  }
+  .hero-left h1{
+    font-size:46px;
+    line-height:1.02;
+    margin:0 0 14px;
+    font-weight:800;
+  }
+  .hero-left p{color:var(--muted);margin:0 0 20px;font-size:16px}
+  .cta-row{display:flex;gap:12px;align-items:center}
+  .btn{
+    padding:12px 18px;border-radius:10px;border:0;cursor:pointer;font-weight:700;font-size:15px;background:var(--accent-1);color:#fff;box-shadow:0 10px 30px rgba(41,98,255,0.08);
+  }
+  .btn.secondary{background:#fff;color:var(--accent-1);border:1px solid rgba(15,23,36,0.04)}
+
+  /* video card */
+  .video-card{
+    background:var(--card);border-radius:14px;border:1px solid var(--glass-border);box-shadow:var(--shadow);overflow:hidden;padding:12px;
+  }
+  .video-thumb{
+    width:100%;
+    aspect-ratio: 16/10;
+    background:linear-gradient(180deg,#e9f2ff,#fff);
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .play-btn{
+    width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,0.95);display:grid;place-items:center;border:2px solid rgba(0,0,0,0.04);cursor:pointer;
+  }
+
+  /* split content area */
+  .split{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:28px;align-items:start}
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+
+  .service{
+    background:linear-gradient(180deg,#fff,#fbfdff);
+    border-radius:12px;padding:16px;border:1px solid rgba(15,23,36,0.04);box-shadow:0 8px 18px rgba(15,23,36,0.04);display:flex;gap:12px;align-items:flex-start;
+  }
+  .service .icon{
+    width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,rgba(41,98,255,0.08),rgba(0,212,255,0.06));display:grid;place-items:center;font-weight:800;color:var(--accent-1)
+  }
+  .service h4{margin:0 0 6px;font-size:15px}
+  .service p{margin:0;color:var(--muted);font-size:14px}
+
+  /* right column features (why choose us, recent work) */
+  .aside-card{background:var(--card);border-radius:12px;padding:16px;border:1px solid var(--glass-border);box-shadow:var(--shadow)}
+  .aside-card h4{margin:0 0 10px}
+
+  /* process + testimonials area */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:28px}
+  .testimonial{background:linear-gradient(180deg,#fff,#fbfdff);padding:18px;border-radius:12px;border:1px solid rgba(15,23,36,0.04)}
+  .process-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px}
+  .process-list li{display:flex;gap:14px;align-items:center}
+  .step-num{width:34px;height:34px;border-radius:8px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2));color:#fff;display:grid;place-items:center;font-weight:800}
+
+  /* footer */
+  footer{margin-top:38px;color:var(--muted);text-align:center;font-size:13px;padding-bottom:28px}
+
+  /* responsive */
+  @media(max-width:1100px){
+    .hero{grid-template-columns:1fr 360px}
+    .split{grid-template-columns:1fr 360px}
+    .two-col{grid-template-columns:1fr}
+  }
+  @media(max-width:760px){
+    header{padding:10px 0 16px}
+    .hero{grid-template-columns:1fr;gap:16px}
+    .video-card{order:2}
+    .split{grid-template-columns:1fr;gap:18px}
+    .services-grid{grid-template-columns:1fr}
+    nav.site-nav{display:none}
+  }
+
+  body {
+  background: linear-gradient(135deg, #e6f4ff 0%, #f8fbff 40%, #ffffff 100%);
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- header -->
+    <header>
+      <div class="brand">
+        <div class="logo-box" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+            <defs><linearGradient id="neonLogo" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#2962ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+            <text x="12" y="17" text-anchor="middle" font-size="15" font-weight="900" fill="url(#neonLogo)">EK</text>
+          </svg>
+        </div>
+        <div>
+          <h1>EDITKARO.IN</h1>
+          <p class="small">Social media marketing & video editing</p>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" class="ghost">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <h1 id="hero-heading">We edit, grade, and craft videos that convert.</h1>
+        <p>For creators, businesses, and brands looking for high-quality video edits tailored for social media and online ads.</p>
+
+        <div class="cta-row">
+          <a class="btn" href="contact.html">Get Started</a>
+          <a class="btn secondary" href="portfolio.html">See Work Samples</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="video-card" aria-hidden="false">
+          <div class="video-thumb" style="background-image:url('assets/thumbs/long.jpeg');background-size:cover;background-position:center;">
+            <div class="play-btn" role="button" aria-label="Play-demo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 5V19L19 12L8 5Z" fill="var(--accent-1)"/>
+                </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- services / aside split -->
+    <section class="split">
+
+      <div>
+        <h3 style="margin:0 0 12px">Our Services</h3>
+        <div class="services-grid">
+          <div class="service">
+            <div class="icon">▶</div>
+            <div>
+              <h4>Short-form Videos</h4>
+              <p>Reels, Shorts & TikTok edits that engage quickly.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="icon">🛒</div>
+            <div>
+              <h4>Ads & e-commerce</h4>
+              <p>Product-first ad edits optimised for conversions.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="icon">🎨</div>
+            <div>
+              <h4>Color Grading</h4>
+              <p>Professional color grading & correction.</p>
+            </div>
+          </div>
+
+          <div class="service">
+            <div class="icon">🎮</div>
+            <div>
+              <h4>Gaming & Montage</h4>
+              <p>High-energy gaming montages and clip edits.</p>
+            </div>
+          </div>
+    
+
+          <div class="service">
+            <div class="icon">🎥</div>
+            <div>
+                <h4>Long-form Videos</h4>
+                <p>YouTube edits, documentaries & vlogs.</p>
+            </div>  
+          </div>
+
+          <div>
+            <div class="icon">📚</div>
+            <div>
+                <h4>Documentaries & Styles</h4>
+                <p>Creative documentary-style video edits.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why choose us (list) -->
+        <div style="margin-top:18px;">
+          <h3 style="margin:0 0 10px">Why choose us</h3>
+          <ul style="margin:0;padding-left:20px;color:var(--muted);">
+            <li style="margin-bottom:8px">Fast turnaround (48–72 hours for typical edits)</li>
+            <li style="margin-bottom:8px">Performance-driven creative with A/B testing</li>
+            <li style="margin-bottom:8px">Revisions & platform-ready deliverables</li>
+            <li style="margin-bottom:8px">Affordable pricing for creators & brands</li>
+            <li style="margin-bottom:8px">Dedicated support & project management</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside>
+        <div class="aside-card" style="margin-bottom:14px">
+          <h4>Recent Work</h4>
+          <div style="margin-top:10px;border-radius:10px;overflow:hidden;border:1px solid rgba(15,23,36,0.04)">
+            <img src="assets/thumbs/resolution.jpeg" alt="Recent edit" style="display:block;width:100%;height:auto">
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <h4>Subscribe for updates</h4>
+          <p class="small muted" style="margin:6px 0 12px">Get new edits, templates and tips — delivered to your inbox.</p>
+
+          <!-- Subscription form -->
+          <form id="emailForm" novalidate>
+            <input id="email" name="email" type="email" placeholder="you@domain.com" required style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid rgba(15,23,36,0.06);box-sizing:border-box">
+            <div style="display:flex;gap:8px;margin-top:10px">
+              <button type="submit" class="btn" style="flex:1">Subscribe</button>
+              <button type="button" class="btn secondary" id="subscribeHelp" style="flex:1">Contact</button>
+            </div>
+          </form>
+
+          <div id="formMessage" style="margin-top:12px"></div>
+        </div>
+      </aside>
+
+    </section>
+
+    <!-- testimonial & process -->
+    <section class="two-col">
+      <div>
+        <h3 style="margin:0 0 10px">What our clients say</h3>
+        <div class="testimonial">
+          <p style="margin:0 0 12px;font-style:italic">"The best video editing service I've ever used. Fast, professional and the results always convert." — Guttur Subhahan</p>
+          <p style="margin:0 0 12px;font-style:italic">"Editkaro transformed our social media presence with their creative edits and quick turnaround times." — Sruthi Roy</p>
+          <p class="small muted" style="margin:0">We partner with creators and D2C brands to scale content performance across platforms.</p>
+        </div>
+      </div>
+
+      <div>
+        <h3 style="margin:0 0 10px">Our process</h3>
+        <ul class="process-list">
+          <li><div class="step-num">1</div><div><strong>Send your footage</strong><div class="small muted">Share upload link and brief.</div></div></li>
+          <li><div class="step-num">2</div><div><strong>We edit & grade</strong><div class="small muted">Draft delivered for feedback.</div></div></li>
+          <li><div class="step-num">3</div><div><strong>Review the draft</strong><div class="small muted">Two rounds of revisions.</div></div></li>
+          <li><div class="step-num">4</div><div><strong>Receive your video</strong><div class="small muted">Platform-ready files & captions.</div></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Editkaro — Made for the mini project.
+    </footer>
+  </div>
+
+  <!-- script: subscription handler (Formspree) -->
+  <script>
+    (function(){
+      const FORM_ENDPOINT = 'https://formspree.io/f/mkgdnvlo'; // your endpoint
+
+      const form = document.getElementById('emailForm');
+      const emailInput = document.getElementById('email');
+      const messageBox = document.getElementById('formMessage');
+      const yearEl = document.getElementById('year');
+      yearEl.textContent = new Date().getFullYear();
+
+      function showMessage(text, type='success'){
+        messageBox.innerHTML = '';
+        const div = document.createElement('div');
+        div.className = 'message ' + (type === 'success' ? 'success' : 'error');
+        div.textContent = text;
+        messageBox.appendChild(div);
+        setTimeout(()=>{ if(messageBox.contains(div)) messageBox.removeChild(div); },6000);
+      }
+
+      if(form){
+        form.addEventListener('submit', async (e)=>{
+          e.preventDefault();
+          const email = (emailInput.value||'').trim();
+          if(!email){ showMessage('Please enter an email.', 'error'); return; }
+          if(!/^\S+@\S+\.\S+$/.test(email)){ showMessage('Please enter a valid email address.', 'error'); return; }
+
+          const btn = form.querySelector('button[type="submit"]');
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+
+          const fd = new FormData();
+          fd.append('email', email);
+          fd.append('formSource','home');
+
+          try{
+            const res = await fetch(FORM_ENDPOINT, { method:'POST', body:fd, headers:{ 'Accept':'application/json' } });
+            const json = await res.json().catch(()=>null);
+            if(res.ok && (json?.ok || json?.status === 'success' || json?.accepted)){
+              showMessage('Thanks — you are subscribed! Check your email for confirmation.', 'success');
+              form.reset();
+            } else {
+              // fallback success text (Formspree sometimes returns differing shapes)
+              showMessage('Subscription saved (if not, please try again).', 'success');
+              form.reset();
+            }
+          }catch(err){
+            console.error(err);
+            showMessage('Subscription failed — try again later or email hello@editkaro.in', 'error');
+          }finally{
+            btn.disabled = false;
+            btn.textContent = 'Subscribe';
+          }
+        });
+
+        // contact button quick link
+        document.getElementById('subscribeHelp').addEventListener('click', ()=> location.href='contact.html');
+      }
+    })();
+  </script>
+</body>
+</html>

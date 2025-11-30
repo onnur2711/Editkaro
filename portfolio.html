@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Editkaro.in — Portfolio</title>
+  <meta name="description" content="Editkaro — Portfolio of editing work. Short-form edits, color grading, ads and more." />
+
+  <!-- Fonts + Theme (same as index) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --accent-1:#2962ff;
+      --accent-2:#00d4ff;
+      --neon: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      --muted:#556077;
+      --text:#0f1724;
+      --card:#ffffff;
+      --glass-border: rgba(15,23,36,0.06);
+      --radius:12px;
+      --shadow: 0 12px 30px rgba(15,23,36,0.06);
+      --max-width:1200px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;background:linear-gradient(135deg,#e6f6ff 0%, #f8fbff 45%, #ffffff 100%);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo-box{
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg, rgba(41,98,255,0.12), rgba(0,212,255,0.06));display:grid;place-items:center;border:1px solid rgba(15,23,36,0.04);box-shadow:var(--shadow);
+    }
+    .brand h1{margin:0;font-size:18px;font-weight:800;color:var(--accent-1);letter-spacing:0.4px}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+    /* nav */
+    nav.site-nav{display:flex;gap:10px;align-items:center}
+    nav.site-nav a{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--neon);color:#fff;text-decoration:none;font-weight:700;font-size:14px;
+      box-shadow: 0 6px 18px rgba(41,98,255,0.06);
+    }
+    nav.site-nav a.ghost{background:transparent;color:var(--accent-1);border:1px solid rgba(41,98,255,0.12);font-weight:700}
+
+    /* Page header / intro */
+    .page-hero{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 0}
+    .page-hero .title{font-size:26px;font-weight:800;margin:0}
+    .page-hero p{margin:6px 0 0;color:var(--muted)}
+
+    /* Filters chips */
+    .filters{display:flex;gap:10px;margin:18px 0;overflow-x:auto;padding-bottom:6px}
+    .chip{padding:9px 14px;border-radius:999px;background:transparent;border:1.5px solid var(--accent-1);color:var(--muted);cursor:pointer;font-weight:700;font-size:14px;white-space:nowrap}
+    .chip.active{background:var(--neon);color:#fff;border:1.5px solid transparent}
+    .chip:focus{outline:3px solid rgba(41,98,255,0.12);outline-offset:4px}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(1,1fr);gap:18px}
+    @media(min-width:600px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:940px){ .grid{grid-template-columns:repeat(3,1fr)} }
+
+    /* Card */
+    .card{background:var(--card);border-radius:12px;border:1px solid var(--glass-border);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s}
+    .card:hover{transform:translateY(-6px)}
+    .thumb{position:relative;height:0;padding-bottom:56%;background-size:cover;background-position:center}
+    .duration{position:absolute;right:10px;bottom:10px;background:rgba(15,23,36,0.06);padding:6px 8px;border-radius:8px;font-size:12px;color:var(--muted)}
+    .play-overlay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,0.97);border:2px solid rgba(0,0,0,0.05);cursor:pointer;transition:transform .2s}
+    .card:hover .play-overlay{transform:translate(-50%,-50%) scale(1.06)}
+
+    .meta{padding:12px 14px 16px 14px}
+    .meta .title{font-weight:700;margin:0 0 6px 0;font-size:15px}
+    .meta .cat{font-size:13px;color:var(--muted)}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(15,23,36,0.28);display:none;align-items:center;justify-content:center;z-index:999;padding:20px}
+    .modal.open{display:flex}
+    .player{background:#000;width:min(1100px,100%);border-radius:10px;overflow:hidden;position:relative}
+    .player video{width:100%;height:100%;display:block}
+    .close{position:absolute;right:10px;top:10px;background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+
+    /* Footer */
+    footer{margin-top:26px;color:var(--muted);text-align:center;font-size:13px;padding-bottom:20px}
+
+    /* small responsive tweaks */
+    @media(max-width:720px){
+      nav.site-nav{display:none}
+    }
+  </style>
+
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="logo-box" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+            <defs><linearGradient id="neonP" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#2962ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+            <text x="12" y="17" text-anchor="middle" font-size="15" font-weight="900" fill="url(#neonP)">EK</text>
+          </svg>
+        </div>
+        <div>
+          <h1>EDITKARO.IN</h1>
+          <p class="muted">Portfolio — Selected edits & reels</p>
+        </div>
+      </div>
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" class="ghost">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Page intro -->
+    <section class="page-hero">
+      <div>
+        <div class="title">Our Work</div>
+        <p class="muted">A curated selection of short-form edits, long-form pieces, ads, and grading reels.</p>
+      </div>
+      <div>
+        <a href="contact.html" class="chip" style="background:var(--neon);color:#fff;border:0">Hire Us</a>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <div class="filters" id="filters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="short">Short-form</button>
+      <button class="chip" data-filter="long">Long-form</button>
+      <button class="chip" data-filter="gaming">Gaming</button>
+      <button class="chip" data-filter="football">Football</button>
+      <button class="chip" data-filter="ecom">Ecommerce</button>
+      <button class="chip" data-filter="doc">Documentary</button>
+      <button class="chip" data-filter="color">Color</button>
+      <button class="chip" data-filter="anime">Anime</button>
+      <button class="chip" data-filter="ads">Ads</button>
+    </div>
+
+    <!-- Gallery -->
+    <main class="grid" id="gallery">
+
+      <!-- Example card — repeat / edit as needed -->
+      <article class="card" data-category="short">
+        <div class="thumb" style="background-image:url('assets/thumbs/Short_Form_Videos.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Short_Form_Videos.mp4" aria-label="Play Short Form Edit">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:18</div>
+        </div>
+        <div class="meta">
+          <div class="title">Short Form Edit</div>
+          <div class="cat muted">Short-form</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="long">
+        <div class="thumb" style="background-image:url('assets/thumbs/long.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/long.mp4" aria-label="Play Long Form">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">4:12</div>
+        </div>
+        <div class="meta">
+          <div class="title">Long Form</div>
+          <div class="cat muted">Long-form</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="doc">
+        <div class="thumb" style="background-image:url('assets/thumbs/Documentary_styles.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Documentary_styles.mp4" aria-label="Play Documentary Style">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">3:30</div>
+        </div>
+        <div class="meta">
+          <div class="title">Documentary Style</div>
+          <div class="cat muted">Documentary</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="gaming">
+        <div class="thumb" style="background-image:url('assets/thumbs/Gaming_Videos.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Gaming_Videos.mp4" aria-label="Play Gaming Edit">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:48</div>
+        </div>
+        <div class="meta">
+          <div class="title">Gaming Edit</div>
+          <div class="cat muted">Gaming</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="football">
+        <div class="thumb" style="background-image:url('assets/thumbs/Football_Edits.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Football_Edits.mp4" aria-label="Play Football Highlights">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:53</div>
+        </div>
+        <div class="meta">
+          <div class="title">Football Highlights</div>
+          <div class="cat muted">Football</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="ecom">
+        <div class="thumb" style="background-image:url('assets/thumbs/eCommerce_ads.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/eCommerce_ads.mp4" aria-label="Play Ecommerce Ad">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:22</div>
+        </div>
+        <div class="meta">
+          <div class="title">Ecommerce Ad</div>
+          <div class="cat muted">Ecommerce</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="color">
+        <div class="thumb" style="background-image:url('assets/thumbs/Color_Grading.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Color_Grading.mp4" aria-label="Play Color Grade Reel">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">1:06</div>
+        </div>
+        <div class="meta">
+          <div class="title">Color Grade Reel</div>
+          <div class="cat muted">Color</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="anime">
+        <div class="thumb" style="background-image:url('assets/thumbs/Animated.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Animated.mp4" aria-label="Play Anime Edit">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:48</div>
+        </div>
+        <div class="meta">
+          <div class="title">Anime / Animated</div>
+          <div class="cat muted">Anime</div>
+        </div>
+      </article>
+
+      <article class="card" data-category="ads">
+        <div class="thumb" style="background-image:url('assets/thumbs/Ads.jpeg');">
+          <div class="play-overlay" role="button" tabindex="0" data-video="assets/videos/Ads.mp4" aria-label="Play Advertisement">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0f1724"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="duration">0:30</div>
+        </div>
+        <div class="meta">
+          <div class="title">Advertisement</div>
+          <div class="cat muted">Ads</div>
+        </div>
+      </article>
+
+    </main>
+
+    <footer>Made for Editkaro.in — Portfolio</footer>
+  </div>
+
+  <!-- Modal (same structure as other pages) -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="player" role="dialog" aria-label="Video player">
+      <button class="close" id="closeBtn" aria-label="Close">✕</button>
+      <video id="videoPlayer" controls playsinline preload="metadata"></video>
+    </div>
+  </div>
+
+  <!-- script.js (defer) — uses your merged script that initializes portfolio and modal -->
+  <script src="script.js" defer></script>
+</body>
+</html>
