@@ -4,304 +4,296 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1, viewport-fit=cover" />
   <title>Editkaro.in — Contact</title>
+  <meta name="description" content="Editkaro — Contact us. Work with Editkaro for social video editing, color grading, ads and more." />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <meta name="theme-color" content="#2962ff">
 
   <style>
-    :root {
+    :root{
       --accent-1:#2962ff;
       --accent-2:#00d4ff;
       --neon: linear-gradient(90deg,var(--accent-1),var(--accent-2));
       --muted:#556077;
       --text:#0f1724;
       --card:#ffffff;
-      --glass:rgba(255,255,255,0.6);
-      --glass-border:rgba(15,23,36,0.06);
-      --shadow:0 12px 30px rgba(15,23,36,0.06);
-      --radius:14px;
-      font-family:Inter,system-ui,Arial,sans-serif;
+      --glass-border: rgba(15,23,36,0.06);
+      --radius:12px;
+      --shadow: 0 12px 30px rgba(15,23,36,0.06);
+      --max-width:1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;background:linear-gradient(135deg,#e6f4ff 0%, #f8fbff 40%, #ffffff 100%);color:var(--text);-webkit-font-smoothing:antialiased;}
+    .container{max-width:var(--max-width);margin:0 auto;padding:20px}
+
+    /* header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo-box{width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg, rgba(41,98,255,0.12), rgba(0,212,255,0.06));display:grid;place-items:center;border:1px solid rgba(15,23,36,0.04);box-shadow:var(--shadow)}
+    .brand h1{margin:0;font-size:18px;font-weight:800;color:var(--accent-1);letter-spacing:0.4px}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+    nav.site-nav{display:flex;gap:10px;align-items:center}
+    nav.site-nav a{
+      display:inline-block;padding:10px 14px;border-radius:10px;background:var(--neon);color:#fff;text-decoration:none;font-weight:700;font-size:14px;
+      box-shadow: 0 6px 18px rgba(41,98,255,0.06);
+    }
+    nav.site-nav a.ghost{background:transparent;color:var(--accent-1);border:1px solid rgba(41,98,255,0.12);font-weight:700}
+
+    /* page layout */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: start;
+      margin-top: 18px;
     }
 
-    body {
-      margin:0;
-      background:linear-gradient(135deg,#e6f6ff 0%, #f8fbff 45%, #ffffff 100%);
-      color:var(--text);
+    /* left card (form) */
+    .contact-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+    }
+    .contact-card h2{ margin:0 0 8px; font-size:26px; }
+    .muted{ color:var(--muted); }
+
+    /* form controls */
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form input[type="tel"],
+    .contact-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(15,23,36,0.06);
+      font-size: 15px;
+      color: var(--text);
+      margin-top: 12px;
+      background: #fff;
+    }
+    .contact-form textarea { min-height: 160px; resize: vertical; }
+
+    .btn-primary {
+      background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+      color: #fff;
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 12px;
     }
 
-    .container {
-      max-width:1100px;
-      margin:0 auto;
-      padding:20px;
+    /* right side info */
+    .info-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
     }
+    .info-card h3 { margin: 0 0 8px; }
+    .info-row { display:flex;gap:10px;align-items:center;margin-top:8px; }
 
-    /* HEADER */
-    header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:16px 0;
+    /* ensure follow links wrap nicely */
+    .follow-links a { color:var(--accent-1); text-decoration:none; font-weight:600; margin-right:14px; display:inline-block; margin-top:6px; }
+
+    /* small responsive tweaks */
+    @media (max-width:980px){
+      .contact-wrapper { grid-template-columns: 1fr 360px; gap:18px; }
     }
-
-    .brand {
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .logo-box {
-      width:56px;
-      height:56px;
-      background:linear-gradient(180deg,rgba(41,98,255,0.12),rgba(0,212,255,0.06));
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      border:1px solid var(--glass-border);
-      box-shadow:var(--shadow);
-    }
-
-    .brand h1 {
-      margin:0;
-      font-size:18px;
-      font-weight:800;
-      color:var(--accent-1);
-    }
-
-    .brand p {
-      margin:0;
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    nav.site-nav {
-      display:flex;
-      gap:10px;
-      margin-left:auto;
-    }
-
-    nav.site-nav a {
-      padding:10px 14px;
-      border-radius:10px;
-      text-decoration:none;
-      color:#fff;
-      background:var(--neon);
-      font-weight:700;
-      box-shadow:0 8px 20px rgba(41,98,255,0.15);
-    }
-
-    nav.site-nav a.ghost {
-      background:transparent;
-      color:var(--accent-1);
-      border:1px solid rgba(41,98,255,0.2);
-    }
-
-    /* CONTACT LAYOUT */
-    .contact-grid {
-      margin-top:32px;
-      display:grid;
-      grid-template-columns:1fr 350px;
-      gap:24px;
-    }
-
-    .card {
-      background:var(--card);
-      padding:22px;
-      border-radius:var(--radius);
-      border:1px solid var(--glass-border);
-      box-shadow:var(--shadow);
-    }
-
-    .card h2, .card h3 {
-      margin-top:0;
-      margin-bottom:12px;
-    }
-
-    input, textarea {
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:1px solid rgba(15,23,36,0.12);
-      font-size:15px;
-      margin-bottom:12px;
-      background:#fff;
-    }
-
-    textarea {
-      height:140px;
-      resize:none;
-    }
-
-    .btn {
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:0;
-      background:var(--neon);
-      color:white;
-      font-weight:700;
-      font-size:16px;
-      cursor:pointer;
-    }
-
-    .info-box {
-      margin-top:18px;
-    }
-
-    .info-item {
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:10px;
-    }
-
-    .info-item span {
-      color:var(--muted);
-      font-size:14px;
-    }
-
-    a.social {
-      text-decoration:none;
-      font-weight:600;
-      color:var(--accent-1);
-      margin-right:12px;
-    }
-
-    .message {
-      margin-top:12px;
-      padding:10px;
-      border-radius:8px;
-      font-size:14px;
-    }
-
-    .success { background:#ecfdf5; color:#065f46; }
-    .error { background:#fff1f2; color:#9f1239; }
-
-    @media(max-width:660px){
-      nav.site-nav{
+    @media (max-width:768px){
+      nav.site-nav {
         display:flex !important;
-        justify-content:flex-end;
-        flex-wrap:wrap;
         gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-end;
       }
-
-      nav.site-nav a{
-        padding:8px 12px;
-        font-size:14px;
-      }
+      nav.site-nav a { padding:8px 10px; background:transparent; color:var(--accent-1); border:1px solid rgba(41,98,255,0.06); }
+      .contact-wrapper { grid-template-columns: 1fr; gap:16px; }
+      .btn-primary { width:100%; text-align:center; }
+      .logo-box { width:48px;height:48px }
     }
-  
 
+    /* accessibility helper (visually hidden labels) */
+    .sr-only { position: absolute; left: -9999px; width:1px; height:1px; overflow:hidden; }
+
+    /* small readout for status */
+    #contactStatus { display:none; margin-top:10px; font-weight:600; }
 
   </style>
 </head>
-
 <body>
-<div class="container">
+  <div class="container">
 
-  <!-- HEADER -->
-  <header>
-    <div class="brand">
-      <div class="logo-box">
-        <svg width="34" height="34" viewBox="0 0 24 24">
-          <defs>
-            <linearGradient id="neonLogo" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stop-color="#2962ff"/>
-              <stop offset="100%" stop-color="#00d4ff"/>
-            </linearGradient>
-          </defs>
-          <text x="12" y="17" font-size="15" font-weight="900" fill="url(#neonLogo)" text-anchor="middle">EK</text>
-        </svg>
-      </div>
-      <div>
-        <h1>EDITKARO.IN</h1>
-        <p>Social media marketing & video editing</p>
-      </div>
-    </div>
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="logo-box" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true">
+            <defs><linearGradient id="neonC" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#2962ff"/><stop offset="100%" stop-color="#00d4ff"/></linearGradient></defs>
+            <text x="12" y="17" text-anchor="middle" font-size="15" font-weight="900" fill="url(#neonC)">EK</text>
+          </svg>
+        </div>
 
-    <nav class="site-nav">
-      <a href="index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="about.html">About</a>
-      <a class="ghost" href="contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <!-- CONTACT SECTION -->
-  <div class="contact-grid">
-
-    <!-- LEFT: FORM -->
-    <div class="card">
-      <h2>Contact Us</h2>
-      <p style="color:var(--muted);margin-bottom:18px;">
-        Have a question or want to work together? Feel free to reach out!
-      </p>
-
-      <form id="contactForm">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="you@example.com" required>
-        <textarea name="message" placeholder="Your message..." required></textarea>
-        <button class="btn" type="submit">Send Message</button>
-      </form>
-
-      <div id="formMessage"></div>
-    </div>
-
-    <!-- RIGHT: INFO -->
-    <div>
-      <div class="card">
-        <h3>Contact Information</h3>
-
-        <div class="info-box">
-          <div class="info-item">📧 <span>dudekulaonnurbeee@gmail.com</span></div>
-          <div class="info-item">📞 <span>+91 96522890664</span></div>
-          <div class="info-item">📍 <span>India — Available Worldwide</span></div>
+        <div>
+          <h1>EDITKARO.IN</h1>
+          <p class="muted">Social media marketing & video editing</p>
         </div>
       </div>
 
-      <div class="card" style="margin-top:14px;">
-        <h3>Follow Us</h3>
-        <a class="social" href="https://www.instagram.com/onnurbeedudekula?igsh=MWkyamE0dmhraTRkNA==&utm_source=ig_contact_invite">Instagram</a>
-        <a class="social" href="https://www.linkedin.com/in/onnurbee-dudekula-a8588928a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn</a>
-        <a class="social" href="https://github.com/onnur2711">GitHub</a>
-      </div>
-    </div>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html" class="ghost">Home</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="about.html">About</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </header>
 
+    <!-- CONTACT WRAPPER -->
+    <section class="contact-wrapper" aria-labelledby="contact-heading">
+
+      <!-- LEFT: form -->
+      <div class="contact-left">
+        <div class="contact-card">
+          <h2 id="contact-heading">Contact Us</h2>
+          <p class="muted">Have a question or want to work together? Feel free to reach out!</p>
+
+          <form id="contactForm" class="contact-form" novalidate>
+            <label class="sr-only" for="name">Full name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
+
+            <label class="sr-only" for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label class="sr-only" for="phone">Phone</label>
+            <input id="phone" name="phone" type="tel" placeholder="+91 9XXXXXXXXX">
+
+            <label class="sr-only" for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your message..." required></textarea>
+
+            <div>
+              <button type="submit" class="btn-primary">Send Message</button>
+            </div>
+
+            <p id="contactStatus" aria-live="polite" class="muted"></p>
+          </form>
+        </div>
+      </div>
+
+      <!-- RIGHT: contact info -->
+      <aside class="contact-right">
+        <div class="info-card" aria-labelledby="info-title">
+          <h3 id="info-title">Contact Information</h3>
+          <div class="info-row">
+            <div style="font-weight:700;">✉</div>
+            <div class="muted">dudekulaonnurbeee@example.com</div>
+          </div>
+          <div class="info-row">
+            <div style="font-weight:700;">📞</div>
+            <div class="muted">+91 96522890664</div>
+          </div>
+          <div class="info-row">
+            <div style="font-weight:700;">📍</div>
+            <div class="muted">India — Available Worldwide</div>
+          </div>
+        </div>
+
+        <div class="info-card" style="margin-top:18px">
+          <h3>Follow Us</h3>
+          <div class="follow-links">
+            <a href="https://www.instagram.com/onnurbeedudekula?igsh=MWkyamE0dmhraTRkNA==&utm_source=ig_contact_invite" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/onnurbee-dudekula-a8588928a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/onnur2711" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <footer style="margin-top:22px;color:var(--muted);text-align:center;font-size:13px;padding-bottom:20px">
+      © <span id="year"></span> EDITKARO.IN — Made for the mini project.
+    </footer>
   </div>
 
-</div>
+  <!-- Form handling script (Formspree) -->
+  <script>
+  (function(){
+    'use strict';
 
-<!-- FORMSPREE SCRIPT -->
-<script>
-const FORM_ENDPOINT = "https://formspree.io/f/mkgdnvlo";
+    const FORM_ENDPOINT = 'https://formspree.io/f/mkgdnvlo'; // <-- your endpoint
 
-const form = document.getElementById("contactForm");
-const msgBox = document.getElementById("formMessage");
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('contactStatus');
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  msgBox.innerHTML = "";
+    if (!form) return;
 
-  const data = new FormData(form);
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.style.display = 'none';
+      status.textContent = '';
 
-  try {
-    const res = await fetch(FORM_ENDPOINT, {
-      method: "POST",
-      body: data,
-      headers: { "Accept": "application/json" }
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const phone = form.phone.value.trim();
+      const message = form.message.value.trim();
+
+      if (!name || !email || !message) {
+        status.style.display = '';
+        status.style.color = 'crimson';
+        status.textContent = 'Please fill name, email and message.';
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        // Formspree accepts FormData
+        const fd = new FormData(form);
+        fd.append('formSource', 'contactPage');
+
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          status.style.display = '';
+          status.style.color = 'green';
+          status.textContent = "Message sent successfully — we'll reply soon.";
+          form.reset();
+        } else {
+          // show message (Formspree may return 200 with JSON or not)
+          const json = await res.json().catch(()=>null);
+          status.style.display = '';
+          if (json && (json.ok || json.accepted || json.status === 'success')) {
+            status.style.color = 'green';
+            status.textContent = "Message sent successfully — we'll reply soon.";
+            form.reset();
+          } else {
+            status.style.color = 'crimson';
+            status.textContent = "Submit failed — try again later.";
+          }
+        }
+      } catch (err) {
+        console.error('submit error', err);
+        status.style.display = '';
+        status.style.color = 'crimson';
+        status.textContent = "Submit failed — try again later (network error).";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      }
     });
-
-    if (res.ok) {
-      msgBox.innerHTML = <div class="message success">Message sent successfully!</div>;
-      form.reset();
-    } else {
-      msgBox.innerHTML = <div class="message error">Something went wrong. Try again.</div>;
-    }
-
-  } catch (err) {
-    msgBox.innerHTML = <div class="message error">Network error. Try again.</div>;
-  }
-});
-</script>
-
+  })();
+  </script>
 </body>
 </html>
