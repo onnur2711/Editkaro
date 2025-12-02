@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 <meta name="theme-color" content="#2962ff">
 <meta name="description" content="Editkaro.in — video editing portfolio. Subscribe for updates and view our portfolio of editing work." />
-<!-- Single-file styles for the updated homepage look -->
 
 <style>
   :root{
@@ -27,7 +26,13 @@
 
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;padding:0;background:linear-gradient(180deg,#fbfdff 0%, #ffffff 100%);color:var(--text);-webkit-font-smoothing:antialiased;}
+  body {
+    background: linear-gradient(135deg, #e6f4ff 0%, #f8fbff 40%, #ffffff 100%);
+  }
   .container{max-width:var(--max-width);margin:0 auto;padding:28px}
+
+  .small{font-size:13px;}
+  .muted{color:var(--muted);}
 
   /* Header */
   header{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:8px 0 28px}
@@ -70,13 +75,37 @@
     aspect-ratio: 16/10;
     background:linear-gradient(180deg,#e9f2ff,#fff);
     border-radius:10px;
-    display:grid;
-    place-items:center;
     position:relative;
     overflow:hidden;
+    display:block;
   }
+  .hero-video{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:10px;
+  }
+
   .play-btn{
-    width:72px;height:72px;border-radius:12px;background:rgba(255,255,255,0.95);display:grid;place-items:center;border:2px solid rgba(0,0,0,0.04);cursor:pointer;
+    width:72px;
+    height:72px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.95);
+    display:grid;
+    place-items:center;
+    border:2px solid rgba(0,0,0,0.04);
+    cursor:pointer;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    transition:opacity 0.25s ease, transform 0.25s ease;
+  }
+  .play-btn.hidden{
+    opacity:0;
+    pointer-events:none;
+    transform:translate(-50%,-50%) scale(0.9);
   }
 
   /* split content area */
@@ -117,19 +146,37 @@
     .split{grid-template-columns:1fr 360px}
     .two-col{grid-template-columns:1fr}
   }
-  @media(max-width:760px){
-    header{padding:10px 0 16px}
-    .hero{grid-template-columns:1fr;gap:16px}
-    .video-card{order:2}
-    .split{grid-template-columns:1fr;gap:18px}
-    .services-grid{grid-template-columns:1fr}
-    nav.site-nav{display:none}
+  @media (max-width:720px) {
+    .hero{grid-template-columns:1fr;gap:24px}
+    nav.site-nav {
+      display: flex !important;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 8px 0;
+    }
+
+    nav.site-nav a {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: transparent;
+      color: var(--accent-1);
+      border: 1px solid rgba(41, 98, 255, 0.08);
+    }
+
+    nav.site-nav a.active,
+    nav.site-nav a:hover {
+      color: #fff;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      border: 1px solid transparent;
+      box-shadow: 0 6px 18px rgba(41,98,255,0.06);
+    }
   }
-
-  body {
-  background: linear-gradient(135deg, #e6f4ff 0%, #f8fbff 40%, #ffffff 100%);
-}
-
 </style>
 </head>
 <body>
@@ -146,7 +193,7 @@
         </div>
         <div>
           <h1>EDITKARO.IN</h1>
-          <p class="small">Social media marketing & video editing</p>
+          <p class="small muted">Social media marketing & video editing</p>
         </div>
       </div>
 
@@ -172,12 +219,24 @@
 
       <div>
         <div class="video-card" aria-hidden="false">
-          <div class="video-thumb" style="background-image:url('assets/thumbs/long.jpeg');background-size:cover;background-position:center;">
-            <div class="play-btn" role="button" aria-label="Play-demo">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 5V19L19 12L8 5Z" fill="var(--accent-1)"/>
-                </svg>
-            </div>
+          <div class="video-thumb">
+            <!-- HERO VIDEO: click video or button to play/pause -->
+            <video
+              id="heroVideo"
+              class="hero-video"
+              muted
+              playsinline
+              preload="metadata"
+              poster="assets/thumbs/long.jpeg">
+              <source src="assets/videos/Gaming_Videos.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+
+            <button class="play-btn" type="button" aria-label="Play demo" id="heroPlayBtn">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 5V19L19 12L8 5Z" fill="var(--accent-1)"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>
@@ -220,21 +279,20 @@
               <p>High-energy gaming montages and clip edits.</p>
             </div>
           </div>
-    
 
           <div class="service">
             <div class="icon">🎥</div>
             <div>
-                <h4>Long-form Videos</h4>
-                <p>YouTube edits, documentaries & vlogs.</p>
-            </div>  
+              <h4>Long-form Videos</h4>
+              <p>YouTube edits, documentaries & vlogs.</p>
+            </div>
           </div>
 
-          <div>
+          <div class="service">
             <div class="icon">📚</div>
             <div>
-                <h4>Documentaries & Styles</h4>
-                <p>Creative documentary-style video edits.</p>
+              <h4>Documentaries & Styles</h4>
+              <p>Creative documentary-style video edits.</p>
             </div>
           </div>
         </div>
@@ -306,7 +364,7 @@
     </footer>
   </div>
 
-  <!-- script: subscription handler (Formspree) -->
+  <!-- script: subscription handler + hero video play/pause -->
   <script>
     (function(){
       const FORM_ENDPOINT = 'https://formspree.io/f/mkgdnvlo'; // your endpoint
@@ -315,12 +373,24 @@
       const emailInput = document.getElementById('email');
       const messageBox = document.getElementById('formMessage');
       const yearEl = document.getElementById('year');
-      yearEl.textContent = new Date().getFullYear();
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       function showMessage(text, type='success'){
+        if (!messageBox) return;
         messageBox.innerHTML = '';
         const div = document.createElement('div');
         div.className = 'message ' + (type === 'success' ? 'success' : 'error');
+        div.style.padding = '8px 10px';
+        div.style.borderRadius = '8px';
+        div.style.fontSize = '13px';
+        div.style.marginTop = '4px';
+        if (type === 'success') {
+          div.style.background = '#ecfdf5';
+          div.style.color = '#065f46';
+        } else {
+          div.style.background = '#fff1f2';
+          div.style.color = '#9f1239';
+        }
         div.textContent = text;
         messageBox.appendChild(div);
         setTimeout(()=>{ if(messageBox.contains(div)) messageBox.removeChild(div); },6000);
@@ -348,7 +418,6 @@
               showMessage('Thanks — you are subscribed! Check your email for confirmation.', 'success');
               form.reset();
             } else {
-              // fallback success text (Formspree sometimes returns differing shapes)
               showMessage('Subscription saved (if not, please try again).', 'success');
               form.reset();
             }
@@ -361,8 +430,39 @@
           }
         });
 
-        // contact button quick link
-        document.getElementById('subscribeHelp').addEventListener('click', ()=> location.href='contact.html');
+        const helpBtn = document.getElementById('subscribeHelp');
+        if (helpBtn) {
+          helpBtn.addEventListener('click', ()=> location.href='contact.html');
+        }
+      }
+
+      // HERO VIDEO CLICK TO PLAY / PAUSE
+      const heroVideo = document.getElementById('heroVideo');
+      const heroPlayBtn = document.getElementById('heroPlayBtn');
+
+      if (heroVideo && heroPlayBtn) {
+        function playHero() {
+          heroVideo.play().then(()=>{
+            heroPlayBtn.classList.add('hidden');
+          }).catch(()=>{ /* autoplay blocked maybe, keep button */ });
+        }
+
+        function pauseHero() {
+          heroVideo.pause();
+          heroPlayBtn.classList.remove('hidden');
+        }
+
+        function toggleHero() {
+          if (heroVideo.paused) playHero();
+          else pauseHero();
+        }
+
+        heroPlayBtn.addEventListener('click', toggleHero);
+        heroVideo.addEventListener('click', toggleHero);
+
+        heroVideo.addEventListener('ended', () => {
+          heroPlayBtn.classList.remove('hidden');
+        });
       }
     })();
   </script>

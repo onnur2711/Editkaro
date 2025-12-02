@@ -176,10 +176,22 @@
     .success { background:#ecfdf5; color:#065f46; }
     .error { background:#fff1f2; color:#9f1239; }
 
-    @media(max-width:860px){
-      .contact-grid { grid-template-columns:1fr; }
-      nav.site-nav { display:none; }
+    @media(max-width:660px){
+      nav.site-nav{
+        display:flex !important;
+        justify-content:flex-end;
+        flex-wrap:wrap;
+        gap:10px;
+      }
+
+      nav.site-nav a{
+        padding:8px 12px;
+        font-size:14px;
+      }
     }
+  
+
+
   </style>
 </head>
 

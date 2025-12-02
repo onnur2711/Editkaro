@@ -1,16 +1,10 @@
-//script.js (merged: Portfolio + About + Contact page)
-// Safe: each part runs only when its DOM elements exist.
-
+// script.js — defensive + debug version (replace your current script.js with this)
 (function () {
   'use strict';
 
-  // --- helpers ---
   const $ = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
   const $one = (sel, ctx = document) => (ctx || document).querySelector(sel);
 
-  /* =====================================================
-     PORTFOLIO: filter chips, card animations, video modal
-     ===================================================== */
   function initPortfolio() {
     const chips = Array.from(document.querySelectorAll('.chip'));
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -18,72 +12,96 @@
     const video = document.getElementById('videoPlayer');
     const closeBtn = document.getElementById('closeBtn');
 
-    if (!chips.length || !cards.length || !modal || !video) return;
+    // If essential DOM missing, just exit silently (safety)
+    if (!modal || !video) {
+      console.warn('Portfolio init: modal or video missing', { modal, video });
+      return;
+    }
 
-    chips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
+    // Filters (unchanged logic)
+    if (chips.length && cards.length) {
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          chip.scrollIntoView?.({ behavior: 'smooth', inline: 'center', block: 'nearest' });
 
-        if (chip.scrollIntoView) {
-          chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-        }
+          const filter = chip.dataset.filter;
+          cards.forEach(card => {
+            const cat = (card.dataset.category || '').toLowerCase();
+            const normalizedFilter = (filter || '').toLowerCase();
+            if (normalizedFilter === 'all' || cat === normalizedFilter) {
+              card.style.display = '';
+              try {
+                card.animate(
+                  [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+                  { duration: 260, easing: 'cubic-bezier(.2,.9,.3,1)' }
+                );
+              } catch (e) { }
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
 
-        const filter = chip.dataset.filter;
-        cards.forEach(card => {
-          const cat = (card.dataset.category || '').toLowerCase();
-          const normalizedFilter = (filter || '').toLowerCase();
-
-          if (normalizedFilter === 'all' || cat === normalizedFilter) {
-            card.style.display = '';
-            try {
-              card.animate(
-                [{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
-                { duration: 260, easing: 'cubic-bezier(.2,.9,.3,1)' }
-              );
-            } catch (e) { }
-          } else {
-            card.style.display = 'none';
+        chip.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            chip.click();
           }
         });
       });
+    }
 
-      chip.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          chip.click();
-        }
-      });
-    });
-
+    // Modal & video behavior
     let lastFocusedEl = null;
+    modal.setAttribute('tabindex', '-1');
 
     function openPlayer(e) {
       const btn = this || e.currentTarget;
-      const src = btn.dataset.video;
-      if (!src) return;
+      const src = btn.dataset?.video;
+      if (!src) {
+        console.warn('openPlayer: no data-video on clicked element', btn);
+        return;
+      }
 
       lastFocusedEl = btn;
+      // Defensive reset
+      try { video.pause(); } catch (e) { }
+      try { video.src = ''; video.load(); } catch (e) { }
+
       video.src = src;
       video.currentTime = 0;
+
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
 
+      // focus close button or modal for accessibility
       (closeBtn || modal).focus?.();
-      video.play().catch(() => { });
+
+      video.play().catch(() => { /* autoplay blocked or other */ });
+      console.info('openPlayer: opened modal for', src);
     }
 
     function closeModal() {
+      if (!modal.classList.contains('open')) {
+        console.info('closeModal: modal already closed');
+        return;
+      }
       modal.classList.remove('open');
       modal.setAttribute('aria-hidden', 'true');
-      video.pause();
-      video.removeAttribute('src');
-      try { video.load(); } catch (e) { }
+
+      try { video.pause(); } catch (e) { }
+      try { video.src = ''; video.load(); } catch (e) { }
+
       document.body.style.overflow = '';
-      lastFocusedEl?.focus?.();
+      try { lastFocusedEl?.focus?.(); } catch (e) { }
+
+      console.info('closeModal: modal closed and video reset');
     }
 
+    // Attach to play overlays
     document.querySelectorAll('.play-overlay').forEach(el => {
       if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
 
@@ -96,16 +114,72 @@
       });
     });
 
-    closeBtn?.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    // Primary close button listeners (direct)
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        console.info('closeBtn.click fired (direct listener)');
+        closeModal();
+      });
+      // pointerdown to catch some touch devices earlier
+      closeBtn.addEventListener('pointerdown', (ev) => {
+        // don't prevent focus behavior — just log & prepare to close
+        console.info('closeBtn.pointerdown fired');
+      });
+    } else {
+      console.warn('initPortfolio: closeBtn not found (id="closeBtn")');
+    }
 
+    // Delegated fallback: any click anywhere that hits .close or [data-close] will close the modal
+    document.addEventListener('click', function delegatedClose(e) {
+      // If click is on backdrop (modal), close
+      if (e.target === modal) {
+        console.info('delegatedClose: clicked modal backdrop');
+        closeModal();
+        return;
+      }
+      // If click is inside something with .close or [data-close] attribute (covers inner SVG/text)
+      const hit = e.target.closest && e.target.closest('.close, [data-close]');
+      if (hit && modal.contains(hit)) {
+        console.info('delegatedClose: clicked .close or [data-close] element', hit);
+        closeModal();
+      }
+    });
+
+    // Also listen for pointerdown on modal for robustness (some devices)
+    modal.addEventListener('pointerdown', (e) => {
+      // if clicked exactly backdrop area, close
+      if (e.target === modal) {
+        console.info('modal.pointerdown on backdrop');
+        closeModal();
+      }
+    });
+
+    // ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        console.info('keydown Escape -> closeModal');
+        closeModal();
+      }
+    });
+
+    // page cleanup
+    window.addEventListener('pagehide', closeModal);
+    window.addEventListener('beforeunload', closeModal);
+
+    // Focus guard: keep keyboard inside modal while open (lightweight)
+    document.addEventListener('focus', (e) => {
+      if (!modal.classList.contains('open')) return;
+      if (!modal.contains(e.target)) {
+        (closeBtn || modal).focus?.();
+      }
+    }, true);
+
+    // initial focus
     window.addEventListener('load', () => { document.querySelector('.chip.active')?.focus(); });
   }
 
-  /* =====================================================
-     ABOUT PAGE FEATURES
-     ===================================================== */
+  /* ABOUT + CONTACT (unchanged) */
   function initAbout() {
     if (!document.querySelector('.about-hero') && !document.querySelector('.team')) return;
 
@@ -123,13 +197,12 @@
 
     function animateNumber(el, target, duration = 900) {
       if (!el) return;
-      const start = 0;
       const startTime = performance.now();
       const original = el.textContent;
 
       const step = (now) => {
         const progress = Math.min((now - startTime) / duration, 1);
-        const current = Math.round(start + (target - start) * progress);
+        const current = Math.round(target * progress);
 
         if (original.includes('%')) el.textContent = current + '%';
         else if (original.match(/k/i)) el.textContent = (Math.round(current / 100) / 10) + 'k';
@@ -183,17 +256,12 @@
     initStats();
   }
 
-  /* =====================================================
-     CONTACT FORM — Formspree Integration (FINAL)
-     ===================================================== */
   function initContactForm() {
     const form = document.getElementById('contactForm');
     if (!form) return;
 
     const status = document.getElementById('contactStatus');
     const clearBtn = document.getElementById('contactClear');
-
-    // ✅ YOUR FORMSPREE ENDPOINT
     const endpoint = "https://formspree.io/f/mkgdnvlo";
 
     form.addEventListener('submit', async (e) => {
@@ -249,12 +317,10 @@
     });
   }
 
-  /* =====================================================
-     Boot
-     ===================================================== */
   document.addEventListener('DOMContentLoaded', () => {
     initPortfolio();
     initAbout();
     initContactForm();
   });
+
 })();

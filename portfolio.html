@@ -85,8 +85,13 @@
 
     /* small responsive tweaks */
     @media(max-width:720px){
-      nav.site-nav{display:none}
+      nav.site-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
     }
+  }
   </style>
 
 </head>
@@ -109,8 +114,8 @@
       </div>
 
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="index.html" class="ghost">Home</a>
-        <a href="portfolio.html">Portfolio</a>
+        <a href="index.html">Home</a>
+        <a href="portfolio.html" class="ghost">Portfolio</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
       </nav>
@@ -270,7 +275,6 @@
   <!-- Modal (same structure as other pages) -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="player" role="dialog" aria-label="Video player">
-      <button class="close" id="closeBtn" aria-label="Close">✕</button>
       <video id="videoPlayer" controls playsinline preload="metadata"></video>
     </div>
   </div>
